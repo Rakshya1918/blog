@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <title>Rakshya Singh's Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <!-- link fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>Rakshya Singh's Blog</h1>
+    <div class="theme-switch-wrapper">
+      <button id="themeSwitcher" class="icon">🌙</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="blog-grid" id="blogGrid"></div>
+  </div>
+  <div class="personal-links">
+    <div class="footer">
+      © Copyright 2024 - Rakshya Singh. All rights reserved.
+    </div>
+    <ul>
+      <li><a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="https://linkedin.com/in/yourusername"><i class="fab fa-linkedin"></i></a></li>
+      <li><a href="https://instagram.com/yourusername"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="https://facebook.com/yourusername"><i class="fab fa-facebook"></i></a></li>
+    </ul>
+  </div>
+
+  <div class="modal" id="postModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

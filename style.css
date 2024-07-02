@@ -1,0 +1,339 @@
+:root {
+    --primary-color: #3AAFB9;
+    --primary-color-dark: #2B7A7F;
+    --secondary-color: #60A63A;
+    --secondary-color-dark: #4B7D2B;
+    --background-color: #FDF4ED;
+    --text-color: #0D1821;
+    --card-background: #ffffff;
+}
+body.dark {
+    --primary-color: #2B7A7F;
+    --primary-color-light: #3AAFB9;
+    --secondary-color: #4B7D2B;
+    --secondary-color-light: #60A63A;
+    --background-color: #0D1821;
+    --text-color: #FDF4ED;
+    --card-background: #2B2B2B;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-bottom: 5rem;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    position: relative;
+}
+.footer{
+    margin-left: 5rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+/* Initial hidden state */
+.blog-card, .highlighted-post {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Fade-in animation class */
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.blog-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(20px);
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.blog-card-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.blog-card-image.loading img {
+    filter: blur(10px);
+}
+
+.blog-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blog-title {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-excerpt {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    width: fit-content;
+    align-self: flex-end;
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    overflow-y: auto;
+}
+
+.modal-content {
+    padding: 2rem;
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.close-modal {
+    position: fixed;
+    right: 2rem;
+    top: 2rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.personal-links {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personal-links ul {
+    margin-right: 5rem;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.personal-links li {
+    margin: 0.5rem 1rem;
+}
+
+.personal-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.personal-links a:hover {
+    color: var(--secondary-color-dark);
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary-color);
+    border-top: 5px solid var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.highlighted-post {
+    grid-column: 1 / -1;
+    display: flex;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.highlighted-post-image {
+    flex: 1;
+    min-height: 300px;
+    position: relative;
+}
+
+.highlighted-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.highlighted-post-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.highlighted-post-title {
+    font-size: 1.75rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.highlighted-post-excerpt {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.theme-switch-wrapper {
+    position: absolute;
+    top: 2.5rem;
+    right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.icon:hover {
+    color: var(--primar-color-dark);
+}
+.post-meta {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+.post-date {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}
+.post-author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+.post-excerpt {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+.post-excerpt::before {
+    content: '"';
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .highlighted-post {
+        flex-direction: column;
+    }
+
+    .highlighted-post-image {
+        min-height: 200px;
+    }
+}
